@@ -89,7 +89,7 @@ What the client handles for you (protocol: [pinnfeed.io/docs/websocket](https://
 - Reconnects with exponential backoff + jitter (`initial_backoff`, `max_backoff`, `max_retries`) on network errors, `4008 slow_consumer` and `429 connection_limit`, then re-subscribes and receives a fresh snapshot.
 - Raises `AuthenticationError` on `401` or close code `4001 key_revoked`, and `PlanError` on `403 plan_lacks_ws` (Free/Hobby keys), with `upgrade_url` set.
 
-Change filters on the fly with `await stream.subscribe(sports=["basketball"])`. Pass `format="raw"` for upstream frames (Pro and Enterprise).
+Change filters on the fly with `await stream.subscribe(sports=["basketball"])`. Pass `format="raw"` (Pro and Enterprise) for `type: "raw"` frames with Pinnacle's own records, un-normalized (see `pinnfeed.types.RawFrame` and the [format](https://pinnfeed.io/answers/pinnacle-odds-websocket-raw-frames)).
 
 ## Errors
 

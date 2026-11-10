@@ -181,5 +181,26 @@ class ClosingDayResponse(TypedDict, total=False):
 Filter = Union[str, int, List[Union[str, int]], None]
 """A filter value: a single value, a list, or a comma-separated string."""
 
+class RawFrame(TypedDict, total=False):
+    """Pro/Enterprise ``format="raw"``: Pinnacle's own records, un-normalized, in a PinnFeed envelope.
+
+    See https://pinnfeed.io/answers/pinnacle-odds-websocket-raw-frames
+    """
+
+    type: Literal["raw"]
+    seq: int
+    ts: int  # when PinnFeed sent the frame (ms since epoch)
+    sportId: Optional[int]
+    sport: Optional[str]
+    channel: Literal["live", "prematch"]
+    kind: Literal["matchup", "matchups", "markets", "snapshot"]
+    action: Literal["upsert", "remove", "replace"]
+    eventId: int
+    part: int  # only on large ``markets`` lists sent in parts
+    final: bool  # apply the list once the part with final=True arrives
+    data: Any  # Pinnacle record(s), un-normalized
+
+
 StreamMessage = Dict[str, Any]
-"""A decoded WebSocket frame: welcome, subscribed, unsubscribed, snapshot, delta, ping, pong or error."""
+"""A decoded WebSocket frame: welcome, subscribed, unsubscribed, snapshot, delta, ping, pong, error,
+or (Pro, ``format="raw"``) a :class:`RawFrame`."""
