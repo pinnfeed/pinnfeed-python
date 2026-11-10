@@ -12,11 +12,11 @@ Official Python client for **[PinnFeed](https://pinnfeed.io)**: real-time Pinnac
 
 ## Install
 
-```bash
-pip install pinnfeed
-```
+The package is not on PyPI yet. Install it from GitHub:
 
-> Until the PyPI release, install from GitHub: `pip install git+https://github.com/pinnfeed/pinnfeed-python`
+```bash
+pip install git+https://github.com/pinnfeed/pinnfeed-python
+```
 
 ## Get an API key
 
